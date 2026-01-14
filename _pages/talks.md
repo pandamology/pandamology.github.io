@@ -9,9 +9,7 @@ permalink: /talks/
   [[Slides](https://...)] [[Abstract](https://...)] [[Video](https://...)] -->
 
 
-### Selected / Past
+### Past
 
 - **2026-01** — *Explicit computation of the Beilinson–Bloch height for non-hyperelliptic curves* — Number Theory Seminar, Soochow University  
-  [[Link](https://math.suda.edu.cn/7f/d0/c10710a688080/page.htm)]
-- **2025-07-18** — *Admissible Green’s functions on pm-graphs* — Workshop on Arithmetic Geometry, XXX  
-  [[Slides](https://...)]
+- **2023-08** — *Number theory from scratch* — Knowledge Sharing Colloquium, Shanghai  
