@@ -5,14 +5,16 @@ permalink: /publications/
 
 ### Preprints
 
-- **Ruihua Wang**, X. Zhang  
-  *Explicit computation of the Beilinson–Bloch height for hyperelliptic curves*  
-  arXiv:2401.xxxxx, 2024  
-  [[arXiv](https://arxiv.org/abs/xxxx)]  
-
-### Journal Articles
-
 - **Ruihua Wang**, Y. Li  
   *Admissible pairings on polarized metrized graphs*  
   *Journal of Number Theory*, 2023  
   [[Journal](https://doi.org/xxxx)] [[PDF](...)]
+
+- **Ruihua Wang**, X. Zhang  
+  *Note on large quadratic character sums*  
+  arXiv:2510.09005, 2025  
+  [[arXiv](https://arxiv.org/abs/2510.09005)]  
+
+### Journal Articles
+
+
