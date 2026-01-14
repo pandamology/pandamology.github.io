@@ -28,7 +28,7 @@ author:
   pronouns         : # example: "he/him"  
   bio              : "Short biography for the left-hand sidebar"
   location         : "Hainan, China"
-  employer         : "Hainan Bielefeld University of Applied Sciences (BiUH)"
+  employer         : [BiUH](https://www.hainan-biuh.edu.cn/en/homepage/)
   uri              : # URL
   email            : "FirstName.LastName@" 
 
