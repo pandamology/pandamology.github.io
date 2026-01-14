@@ -8,7 +8,7 @@ permalink: /publications/
 - **Ruihua Wang**, Y. Li  
   *Large values of quadratic character sums revisited*  
   arXiv:2512.24147, 2026  
-  [[Journal](https://arxiv.org/abs/2512.24147)] [[PDF](...)]
+  [[arXiv](https://arxiv.org/abs/2512.24147)]
 
 - **Ruihua Wang**, X. Zhang  
   *Note on large quadratic character sums*  
