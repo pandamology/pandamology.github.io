@@ -6,9 +6,9 @@ permalink: /publications/
 ### Preprints
 
 - **Ruihua Wang**, Y. Li  
-  *Admissible pairings on polarized metrized graphs*  
-  *Journal of Number Theory*, 2023  
-  [[Journal](https://doi.org/xxxx)] [[PDF](...)]
+  *Large values of quadratic character sums revisited*  
+  arXiv:2512.24147, 2026  
+  [[Journal](https://arxiv.org/abs/2512.24147)] [[PDF](...)]
 
 - **Ruihua Wang**, X. Zhang  
   *Note on large quadratic character sums*  
