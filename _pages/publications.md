@@ -5,7 +5,7 @@ permalink: /publications/
 
 ### Preprints
 
-- [Zikang Dong](https://zikangdong.github.io/), **Ruihua Wang**, Weijia Wang, Hao Zhang
+- [Zikang Dong](https://zikangdong.github.io/), **Ruihua Wang**, Weijia Wang, [Hao Zhang](https://grzy.hnu.edu.cn/site/index/zhanghao)
   *Large values of quadratic character sums revisited*  
   arXiv:2512.24147, 2026  
   [[arXiv](https://arxiv.org/abs/2512.24147)]
