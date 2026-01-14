@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-I am an Assistant Professor in Arithmetic Geometry at BiUH.
+I am an Assistant Professor in Arithmetic Geometry at [BiUH](https://www.hainan-biuh.edu.cn/en/homepage/).
 
 My research interests include arithmetic geometry and analytic number theory, with a focus on explicit and concrete problems arising in arithmetic contexts.
 
