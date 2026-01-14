@@ -5,8 +5,8 @@ permalink: /talks/
 
 ### Upcoming
 
-- **2026-03-10** — *Title of the talk* — Seminar, Institution (City)  
-  [[Slides](https://...)] [[Abstract](https://...)] [[Video](https://...)]
+<!-- - **2026-03-10** — *Title of the talk* — Seminar, Institution (City)  
+  [[Slides](https://...)] [[Abstract](https://...)] [[Video](https://...)] -->
 
 
 ### Selected / Past
