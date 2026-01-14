@@ -27,7 +27,7 @@ author:
   name             : "Ruihua (Leonard) Wang"
   pronouns         : # example: "he/him"  
   bio              : "Short biography for the left-hand sidebar"
-  location         : "Hainan, China"
+  location         : [Hainan, China](https://www.google.com/maps/place/Danzhou,+Hainan,+China/@19.5654278,108.9994058,10z/data=!3m1!4b1!4m6!3m5!1s0x314e233e017727d3:0xea6ae7aa0a3d714!8m2!3d19.5209299!4d109.58069!16s%2Fm%2F02z61t1?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D)
   employer         : [BiUH](https://www.hainan-biuh.edu.cn/en/homepage/)
   uri              : # URL
   email            : "ruih.wan9@gmail.com" 
