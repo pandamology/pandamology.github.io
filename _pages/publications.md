@@ -18,3 +18,6 @@ arXiv:[2512.24147](https://arxiv.org/abs/2512.24147), 2026
 To be added.
 
 
+### PhD Thesis
+-  *Explicit computation of the height of a Gross-Schoen cycle*
+  [Link](https://scholarlypublications.universiteitleiden.nl/handle/1887/3480346), 2022
