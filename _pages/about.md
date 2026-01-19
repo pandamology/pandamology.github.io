@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Ruihua (Leonard) Wang"
+title: "Ruihua Wang"
 author_profile: true
 redirect_from: 
   - /about/
