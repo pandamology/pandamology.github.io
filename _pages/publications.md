@@ -20,4 +20,5 @@ To be added.
 
 ### PhD Thesis
 -  *Explicit computation of the height of a Gross-Schoen cycle*
-  [Link](https://scholarlypublications.universiteitleiden.nl/handle/1887/3480346), 2022
+
+[Link](https://scholarlypublications.universiteitleiden.nl/handle/1887/3480346), 2022
