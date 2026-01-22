@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-I am a Lecturer in Arithmetic Geometry at Hainan Bielefeld University of Applied Sciences ([BiUH](https://www.hainan-biuh.edu.cn/en/homepage/)).
+I am a Lecturer in Arithmetic Geometry at [Hainan Bielefeld University of Applied Sciences](https://www.hainan-biuh.edu.cn/en/homepage/) (BiUH).
 
 My research interests include arithmetic geometry and analytic number theory, with a focus on explicit and concrete problems arising in arithmetic contexts.
 
