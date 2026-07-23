@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 ### Position
-I am a Lecturer in Number Theory at [Hainan Bielefeld University of Applied Sciences](https://www.hainan-biuh.edu.cn/en/homepage/) (BiUH).
+I am a Lecturer in Number Theory at [Hainan Bielefeld University of Applied Sciences](https://www.hainan-biuh.edu.cn/en/homepage/) (BiUH). Before joining BiUH, I worked in industry as a 6G Researcher and a Blockchain Product Manager.
 
 ### Research Interests
 My research lies in analytic number theory and arithmetic geometry, with a particular interest in explicit and concrete problems arising in arithmetic contexts. I am especially interested in situations where geometric, analytic, and arithmetic ideas interact, and where abstract theories admit effective formulations and explicit computations. Some of my work also involves computational implementation in support of theoretical investigations.
