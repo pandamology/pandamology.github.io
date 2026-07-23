@@ -4,7 +4,7 @@ permalink: /talks/
 ---
 
 ### Upcoming
-- **2026-06** — *Large values of quadratic character sums*, Shandong University (Weihai)
+- **2026-07** — *Large values of quadratic character sums*, Shandong University (Weihai)
 <!-- - **2026-03-10** — *Title of the talk* — Seminar, Institution (City)  
   [[Slides](https://...)] [[Abstract](https://...)] [[Video](https://...)] -->
 
