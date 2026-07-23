@@ -16,5 +16,5 @@ My research lies in arithmetic geometry and analytic number theory, with a parti
 I received my Ph.D. under the supervision of [David Holmes](https://davidholmes.nl/) and [Robin de Jong](https://pub.math.leidenuniv.nl/~jongrsde/) from [Mathematical Institute](https://www.universiteitleiden.nl/en/science/mathematics) at [Universiteit Leiden](https://www.universiteitleiden.nl/en). My earlier training at the master’s level was under the supervision of [Jianya Liu](http://www.prime.sdu.edu.cn/info/1023/1151.htm) from [School of Mathematics](https://www.math.sdu.edu.cn/index.htm) at [Shandong University](https://www.en.sdu.edu.cn/). During my undergraduate studies at Shandong University, I completed my bachelor’s thesis under the supervision of [Ye Tian](http://www.mcm.ac.cn/faculty/tianye/201409/t20140916_1092889.html) at [Chinese Academy of Sciences](https://english.amss.cas.cn/).
 
 # Honours
-- Hainan Free Trade Port Category E Talent
-- Four ways Talent Program (Hainan Province)
+- High-level Talent for Hainan Free Trade Port (Category E), 2026
+- Four Talents Gathering Plan, 2026
