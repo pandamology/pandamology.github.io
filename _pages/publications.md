@@ -5,6 +5,10 @@ permalink: /publications/
 
 ### Preprints
 
+- Lujia Wang, **Ruihua Wang**
+*Obstructions to coloring arithmetic graphs*  
+arXiv:[2609.15081](https://arxiv.org/pdf/2609.15081v1), 2026  
+
 - [Zikang Dong](https://zikangdong.github.io/), **Ruihua Wang**, Weijia Wang, [Hao Zhang](https://grzy.hnu.edu.cn/site/index/zhanghao)  
 *Large values of quadratic character sums revisited*  
 arXiv:[2512.24147](https://arxiv.org/abs/2512.24147), 2026  
