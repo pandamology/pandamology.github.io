@@ -7,7 +7,15 @@ permalink: /publications/
 
 - Lujia Wang, **Ruihua Wang**  
 *Obstructions to coloring arithmetic graphs*  
-arXiv:[2609.15081](https://arxiv.org/pdf/2609.15081v1), 2026  
+arXiv:[2609.15081](https://arxiv.org/pdf/2609.15081v1), 2026
+
+- [Zikang Dong](https://zikangdong.github.io/), **Ruihua Wang**, Weijia Wang, [Hao Zhang](https://grzy.hnu.edu.cn/site/index/zhanghao)    
+*Large zeta sums and zeros of the Riemann zeta function*  
+arXiv:[2608.31060](https://arxiv.org/pdf/2608.31060), 2026  
+
+- [Zikang Dong](https://zikangdong.github.io/), **Ruihua Wang**, Weijia Wang, [Hao Zhang](https://grzy.hnu.edu.cn/site/index/zhanghao), Shengbo Zhao    
+*Large values of quadratic character sums*  
+arXiv:[2608.15773](https://arxiv.org/pdf/2608.15773), 2026  
 
 - [Zikang Dong](https://zikangdong.github.io/), **Ruihua Wang**, Weijia Wang, [Hao Zhang](https://grzy.hnu.edu.cn/site/index/zhanghao)  
 *Large values of quadratic character sums revisited*  
