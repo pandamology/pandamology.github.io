@@ -15,6 +15,31 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  pages-source:
+    name: Check Pages publishing configuration
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: read
+    steps:
+      - name: Read the current Pages publishing source
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mode=$(gh api "repos/${GITHUB_REPOSITORY}/pages" --jq '.build_type')
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "Current GitHub Pages publishing source: $mode" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "Publishing source is ${{ steps.pages.outputs.mode }}"
+        env:
+          PAGES_MODE: ${{ steps.pages.outputs.mode }}
+        run: |
+          if [ "$PAGES_MODE" != "workflow" ]; then
+            echo "::error::Before merging or deploying, open repository Settings > Pages > Build and deployment > Source and select GitHub Actions. The current live site has not been changed."
+            exit 1
+          fi
+
   build:
     runs-on: ubuntu-24.04
     steps:
@@ -77,7 +102,7 @@ jobs:
 
   deploy:
     if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-    needs: build
+    needs: [build, pages-source]
     runs-on: ubuntu-24.04
     permissions:
       pages: write
