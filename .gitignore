@@ -5,8 +5,14 @@ _site/
 # Ignore the directory for local files during development
 local/
 
-# Ignore the Gemfile that is generated
-Gemfile.lock
+# Keep Gemfile.lock in Git so local and hosted builds use the same dependencies.
+
+# Generated CV and local verification output
+build/
+tmp/
+__pycache__/
+*.pyc
+/files/CV.pdf
 
 # Ignore files created by npm
 node_modules

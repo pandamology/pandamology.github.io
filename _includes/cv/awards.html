@@ -1,0 +1,5 @@
+<ul>
+{% for cv_award in include.records %}
+  <li data-cv-id="{{ cv_award.id | escape }}">{{ cv_award.title | escape }}{% if cv_award.organization %}, {{ cv_award.organization | escape }}{% endif %}{% if cv_award.date %}, {% if cv_award.startDate and cv_award.startDate != cv_award.date %}{{ cv_award.startDate | escape }}–{% endif %}{{ cv_award.date | escape }}{% endif %}</li>
+{% endfor %}
+</ul>

@@ -1,0 +1,58 @@
+% Generated content is inserted by scripts/build_cv.py. Edit the layout here,
+% and edit personal information only in _data/cv.json.
+\documentclass[11pt,a4paper]{article}
+\usepackage[top=19mm,bottom=18mm,left=21mm,right=21mm,headheight=13pt,headsep=6mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\definecolor{cvlink}{HTML}{174B72}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,urlcolor=cvlink,linkcolor=cvlink,
+  pdftitle={@@PDF_TITLE@@},pdfauthor={@@NAME@@},pdfsubject={Curriculum vitae}}
+\urlstyle{same}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small @@NAME@@}
+\fancyhead[R]{\small Curriculum Vitae}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{firstpage}{\fancyhead{}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{1.5em}
+\raggedbottom
+\widowpenalty=10000
+\clubpenalty=10000
+\titleformat{\section}{\large\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{11pt}{5pt}
+\newcommand{\cvsection}[1]{\Needspace{6\baselineskip}\section*{#1}}
+\newcommand{\cvrow}[2]{%
+  \par\addvspace{2.5pt}\noindent
+  \begin{minipage}[t]{0.17\linewidth}\small\raggedright\textbf{#1}\end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.80\linewidth}\raggedright #2\end{minipage}\par}
+\newcommand{\cvdetail}[1]{\\[-0.4pt]{\small #1}}
+\newcommand{\cvsubsection}[1]{\par\addvspace{4pt}\noindent\textbf{#1}\par\nobreak\vspace{1pt}}
+\newenvironment{cvpapers}{%
+  \begin{enumerate}[label={[\arabic*]},leftmargin=7mm,labelsep=1.4mm,
+    itemsep=4pt,parsep=0pt,topsep=3pt,partopsep=0pt]
+  \raggedright
+  \interlinepenalty=10000
+}{\end{enumerate}}
+\begin{document}
+\thispagestyle{firstpage}
+\begin{center}
+  {\LARGE\bfseries @@NAME@@}\par\vspace{4pt}
+  {\small @@CONTACT@@}\par\vspace{2pt}
+  {\small @@WEBSITE@@}
+\end{center}
+\vspace{-1pt}\hrule\vspace{3pt}
+@@SECTIONS@@
+\par\addvspace{10pt}\hrule\vspace{5pt}
+{\footnotesize Last updated: @@UPDATED@@}
+\end{document}

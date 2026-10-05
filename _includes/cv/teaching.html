@@ -1,0 +1,9 @@
+{% assign cv_courses = site.data.cv.teaching %}
+{% if include.homepage_only %}{% assign cv_courses = cv_courses | where: 'homepage', true %}{% endif %}
+{% if cv_courses.size > 0 %}
+<ul>
+{% for cv_course in cv_courses %}
+  <li data-cv-id="{{ cv_course.id | escape }}"><strong>{{ cv_course.course | escape }}</strong>{% if cv_course.role %} — <em>{{ cv_course.role | escape }}</em>{% endif %} — {{ cv_course.institution | escape }} — {% if cv_course.term %}{{ cv_course.term | escape }} {% endif %}{{ cv_course.date | escape }}</li>
+{% endfor %}
+</ul>
+{% endif %}

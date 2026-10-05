@@ -1,3 +1,22 @@
+# Ruihua Wang — Academic Website
+
+Website: <https://pandamology.github.io/> · [CV](https://pandamology.github.io/cv/) · [PDF](https://pandamology.github.io/files/CV.pdf)
+
+## 日常更新
+
+**个人资料只编辑 [`_data/cv.json`](_data/cv.json)。** 提交到 `master` 后，GitHub Actions 自动生成首页、论文、报告、教学页面，以及完整网页 CV 和 PDF，并一起发布。
+
+详细说明见 **[更新个人主页和 CV](docs/MAINTAINING.md)**，包含各字段的位置、论文接收后的修改方法、日期和学期写法，以及发布失败时如何查看原因。
+
+- 工作流：`.github/workflows/pages.yml`（Build website and CV）
+- PDF 排版：`templates/cv.tex`
+- 一键本地构建：`bash scripts/build_site.sh`
+- 发布方式：GitHub Pages → Source → GitHub Actions
+
+本仓库沿用 AcademicPages。下面保留上游模板说明；日常内容维护和本地预览请优先使用上面的专用说明。
+
+---
+
 # Academic Pages
 **Academic Pages is a GitHub Pages template for personal and professional portfolio-oriented websites.**
 

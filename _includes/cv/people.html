@@ -1,0 +1,6 @@
+{%- for cv_person in include.people -%}
+  {%- unless forloop.first -%}{% if include.conjunction and forloop.last %} and {% else %}, {% endif %}{%- endunless -%}
+  {%- if include.highlight and cv_person.name == site.data.cv.basics.name -%}<strong>{%- endif -%}
+  {%- include cv/link.html text=cv_person.name url=cv_person.url -%}
+  {%- if include.highlight and cv_person.name == site.data.cv.basics.name -%}</strong>{%- endif -%}
+{%- endfor -%}

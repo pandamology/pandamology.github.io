@@ -1,0 +1,17 @@
+{%- comment -%}
+Compare ISO dates at the precision actually recorded. A month-only talk is
+upcoming throughout that month if marked upcoming; after it, it is past.
+Do not feed partial dates through Liquid's date filter, which fills missing
+components and can turn a year or month into an invented date.
+{%- endcomment -%}
+{%- assign cv_talk_date = include.talk.date | append: '' -%}
+{%- assign cv_talk_precision = cv_talk_date | size -%}
+{%- assign cv_build_date = site.cv_as_of | default: site.time -%}
+{%- assign cv_comparison_date = cv_build_date | date: '%Y-%m-%d' | slice: 0, cv_talk_precision -%}
+{%- if cv_talk_date > cv_comparison_date -%}
+upcoming
+{%- elsif cv_talk_date == cv_comparison_date and include.talk.status == 'upcoming' -%}
+upcoming
+{%- else -%}
+past
+{%- endif -%}
