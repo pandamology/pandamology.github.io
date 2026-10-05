@@ -1,0 +1,34 @@
+---
+layout: single
+title: "更新主页与 CV"
+permalink: /manage/
+author_profile: false
+sitemap: false
+---
+<link rel="stylesheet" href="/assets/css/cv-editor.css">
+<div id="cv-editor" lang="zh-CN">
+  <p class="intro">填写资料 → 下载更新文件 → 在 GitHub 上传并提交。主页与 CV 会一起更新。</p>
+  <p class="muted">CV 保持 PDF 预览，PDF 内不显示个人域名，也不包含超链接。</p>
+  <div class="toolbar">
+    <button id="export-cv" disabled>1. 下载更新文件</button>
+    <a class="button" id="upload-cv" href="https://github.com/pandamology/pandamology.github.io/upload/master/_data" target="_blank" rel="noopener">2. 打开 GitHub 上传</a>
+  </div>
+  <p id="editor-status" role="status" aria-live="polite">正在读取最新资料…</p>
+  <details class="instructions">
+    <summary>第一次使用：怎么完成更新？</summary>
+    <ol>
+      <li>在下面选择要修改的内容，直接填写。新增论文、报告或课程，点击“新增记录”。</li>
+      <li>点击“下载更新文件”，得到名为 <strong>cv.json</strong> 的文件。</li>
+      <li>点击“打开 GitHub 上传”，用你的 GitHub 账号登录，将刚下载的文件拖入上传框。文件名必须是 <strong>cv.json</strong>，如果浏览器加了数字后缀，请先改回这个名字。</li>
+      <li>页面下方选择提交到 <strong>master</strong>，点击 <strong>Commit changes</strong>。如果出现替换同名文件的提示，确认替换。</li>
+      <li>在 <a href="https://github.com/pandamology/pandamology.github.io/actions" target="_blank" rel="noopener">发布进度</a>中等待最新一次“Build website and CV”变绿，再查看<a href="/" target="_blank">主页</a>和<a href="/cv/" target="_blank">CV</a>。</li>
+    </ol>
+    <p>填写和下载不会立即修改网站；GitHub 提交后才会发布。你无需上传 PDF。新增内容可能使 PDF 自然增加页数。</p>
+    <p>发布失败时线上保留上一次成功版本。可以回到这个页面修正资料后重新提交；旧资料可在 GitHub 的文件历史中找回。</p>
+  </details>
+  <div class="selector"><label for="editor-section">我要更新</label><select id="editor-section" disabled></select><button id="add-record" hidden>新增记录</button></div>
+  <div id="editor-fields"></div>
+  <div class="import-row"><button id="save-draft" disabled>保存草稿</button><label class="button" for="import-cv">载入更新文件或草稿</label><input id="import-cv" type="file" accept=".json,application/json"><button id="reload-cv">重新读取线上资料</button></div>
+  <p class="muted">未下载的修改只保留在当前页面，关闭或刷新前请先下载。资料文件中的网页链接仍用于其他页面，但不会成为 PDF 的超链接。</p>
+</div>
+<script src="/assets/js/cv-editor.js" defer></script>
