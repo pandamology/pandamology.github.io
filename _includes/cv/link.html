@@ -1,0 +1,5 @@
+{%- if include.url and include.url != empty -%}
+<a href="{{ include.url | escape }}">{{ include.text | escape }}</a>
+{%- else -%}
+{{ include.text | escape }}
+{%- endif -%}

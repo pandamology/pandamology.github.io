@@ -1,0 +1,33 @@
+{% assign cv_heading_level = include.level | default: 2 %}
+{% assign cv_preprints = site.data.cv.publications | where: 'status', 'preprint' %}
+{% assign cv_published_articles = site.data.cv.publications | where: 'status', 'published' %}
+{% assign cv_accepted_articles = site.data.cv.publications | where: 'status', 'accepted' %}
+
+{% if cv_preprints.size > 0 %}
+<h{{ cv_heading_level }}>Preprints</h{{ cv_heading_level }}>
+<ul>
+{% for cv_paper in cv_preprints %}
+  {% include cv/publication-item.html paper=cv_paper %}
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if cv_published_articles.size > 0 or cv_accepted_articles.size > 0 %}
+<h{{ cv_heading_level }}>Journal Articles</h{{ cv_heading_level }}>
+<ul>
+{% for cv_paper in site.data.cv.publications %}
+  {% if cv_paper.status == 'published' or cv_paper.status == 'accepted' %}
+  {% include cv/publication-item.html paper=cv_paper %}
+  {% endif %}
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if site.data.cv.theses.size > 0 %}
+<h{{ cv_heading_level }}>PhD Thesis</h{{ cv_heading_level }}>
+<ul>
+{% for cv_thesis in site.data.cv.theses %}
+  <li data-cv-id="{{ cv_thesis.id | escape }}"><em>{% include cv/link.html text=cv_thesis.title url=cv_thesis.url %}</em>, {{ cv_thesis.year | escape }}</li>
+{% endfor %}
+</ul>
+{% endif %}

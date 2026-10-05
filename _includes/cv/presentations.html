@@ -1,0 +1,29 @@
+{% assign cv_talks = site.data.cv.presentations | sort: 'date' %}
+{% if include.homepage_only %}{% assign cv_talks = cv_talks | where: 'homepage', true %}{% endif %}
+{% assign cv_talk_heading_level = include.level | default: 2 %}
+
+{% capture cv_upcoming_talks %}
+  {% for cv_talk in cv_talks %}
+    {% capture cv_talk_state %}{% include cv/presentation-state.html talk=cv_talk %}{% endcapture %}
+    {% assign cv_talk_state = cv_talk_state | strip %}
+    {% if cv_talk_state == 'upcoming' %}{% include cv/presentation-item.html talk=cv_talk %}{% endif %}
+  {% endfor %}
+{% endcapture %}
+{% assign cv_upcoming_talks = cv_upcoming_talks | strip %}
+{% if cv_upcoming_talks != empty %}
+<h{{ cv_talk_heading_level }}>Upcoming</h{{ cv_talk_heading_level }}>
+<ul>{{ cv_upcoming_talks }}</ul>
+{% endif %}
+
+{% capture cv_past_talks %}
+  {% for cv_talk in cv_talks reversed %}
+    {% capture cv_talk_state %}{% include cv/presentation-state.html talk=cv_talk %}{% endcapture %}
+    {% assign cv_talk_state = cv_talk_state | strip %}
+    {% if cv_talk_state == 'past' %}{% include cv/presentation-item.html talk=cv_talk %}{% endif %}
+  {% endfor %}
+{% endcapture %}
+{% assign cv_past_talks = cv_past_talks | strip %}
+{% if cv_past_talks != empty %}
+<h{{ cv_talk_heading_level }}>Past</h{{ cv_talk_heading_level }}>
+<ul>{{ cv_past_talks }}</ul>
+{% endif %}

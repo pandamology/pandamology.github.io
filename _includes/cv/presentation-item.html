@@ -1,0 +1,1 @@
+<li data-cv-id="{{ include.talk.id | escape }}"><strong>{{ include.talk.date | escape }}</strong> — <em>{{ include.talk.titleMath | default: include.talk.title | escape }}</em>{% if include.talk.event %}, {{ include.talk.event | escape }}{% endif %}{% if include.talk.location %}, {{ include.talk.location | escape }}{% endif %}</li>

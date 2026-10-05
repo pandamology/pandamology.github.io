@@ -1,0 +1,116 @@
+name: Build website and CV
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pages-source:
+    name: Check Pages publishing configuration
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: read
+    steps:
+      - name: Read the current Pages publishing source
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mode=$(gh api "repos/${GITHUB_REPOSITORY}/pages" --jq '.build_type')
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "Current GitHub Pages publishing source: $mode" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "Publishing source is ${{ steps.pages.outputs.mode }}"
+        env:
+          PAGES_MODE: ${{ steps.pages.outputs.mode }}
+        run: |
+          if [ "$PAGES_MODE" != "workflow" ]; then
+            echo "::error::Before merging or deploying, open repository Settings > Pages > Build and deployment > Source and select GitHub Actions. The current live site has not been changed."
+            exit 1
+          fi
+
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the website
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install PDF compiler and inspection tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-extra texlive-fonts-recommended fonts-texgyre fonts-lmodern poppler-utils
+
+      - name: Validate the shared CV and derive website metadata
+        run: python scripts/prepare_build.py
+
+      - name: Generate the PDF from the shared CV
+        run: |
+          updated=$(python -c 'import json; print(json.load(open("build/cv-config.yml"))["cv_updated"])')
+          as_of=$(python -c 'import json; print(json.load(open("build/cv-config.yml"))["cv_as_of"])')
+          python scripts/build_cv.py --updated "$updated" --as-of "$as_of" --output build/CV.pdf --tex-output build/CV.tex
+
+      - name: Build the website
+        env:
+          JEKYLL_ENV: production
+        run: bundle exec jekyll build --config _config.yml,build/cv-config.yml --destination _site
+
+      - name: Add the PDF to the website and verify all outputs
+        run: |
+          mkdir -p _site/files
+          cp build/CV.pdf _site/files/CV.pdf
+          python scripts/verify_build.py --site _site --pdf _site/files/CV.pdf
+
+      - name: Save a reviewable website and PDF
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-preview
+          path: |
+            _site/
+            build/CV.tex
+          retention-days: 7
+
+      - name: Prepare the Pages deployment
+        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+    needs: [build, pages-source]
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish the website and PDF together
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,14 @@
+{% unless include.narrative %}<ul>{% endunless %}
+{% for cv_degree in site.data.cv.education %}
+  {% if include.narrative %}
+  <p data-cv-id="{{ cv_degree.id | escape }}">I received my {{ cv_degree.degree | escape }}{% if cv_degree.area %} in {{ cv_degree.area | escape }}{% endif %} from {% if cv_degree.department %}the {% include cv/link.html text=cv_degree.department url=cv_degree.departmentUrl %} at {% endif %}{% include cv/link.html text=cv_degree.institution url=cv_degree.url %}{% if cv_degree.endDate %} in {{ cv_degree.endDate | escape }}{% endif %}{% if cv_degree.program %} ({{ cv_degree.program | escape }}){% endif %}.{% if cv_degree.supervisors.size > 0 %} {{ cv_degree.supervisorRole | default: 'Supervision' | escape }}: {% include cv/people.html people=cv_degree.supervisors conjunction=true %}{% if cv_degree.thesisHost %} at {% include cv/link.html text=cv_degree.thesisHost url=cv_degree.thesisHostUrl %}{% endif %}.{% endif %}</p>
+  {% else %}
+  <li data-cv-id="{{ cv_degree.id | escape }}">
+    <strong>{{ cv_degree.degree | escape }}{% if cv_degree.area %} in {{ cv_degree.area | escape }}{% endif %}</strong> — {% include cv/link.html text=cv_degree.institution url=cv_degree.url %}{% if cv_degree.endDate %}, {{ cv_degree.endDate | escape }}{% endif %}
+    {% if cv_degree.department %}<br>{% include cv/link.html text=cv_degree.department url=cv_degree.departmentUrl %}{% endif %}
+    {% if cv_degree.program %}<br>{{ cv_degree.program | escape }}{% endif %}
+    {% if cv_degree.supervisors.size > 0 %}<br>{{ cv_degree.supervisorRole | default: 'Supervision' | escape }}: {% include cv/people.html people=cv_degree.supervisors conjunction=true %}{% if cv_degree.thesisHost %} at {% include cv/link.html text=cv_degree.thesisHost url=cv_degree.thesisHostUrl %}{% endif %}{% endif %}
+  </li>
+  {% endif %}
+{% endfor %}
+{% unless include.narrative %}</ul>{% endunless %}

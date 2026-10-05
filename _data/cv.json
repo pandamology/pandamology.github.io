@@ -1,152 +1,498 @@
 {
+  "schemaVersion": 1,
   "basics": {
-    "name": "Your Sidebar Name",
-    "email": "none@example.org",
-    "phone": "",
-    "website": "https://academicpages.github.io",
-    "summary": "Currently employed at Red Brick University. Short biography for the left-hand sidebar",
-    "location": {
-      "address": "",
-      "postalCode": "",
-      "city": "Earth",
-      "countryCode": "US",
-      "region": ""
-    },
-    "profiles": [
-      {
-        "network": "Google Scholar",
-        "username": "",
-        "url": "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
-      },
-      {
-        "network": "ORCID",
-        "username": "",
-        "url": "https://orcid.org/yourorcidurl"
-      },
-      {
-        "network": "GitHub",
-        "username": "academicpages",
-        "url": "https://github.com/academicpages"
-      }
-    ]
+    "name": "Ruihua Wang",
+    "email": "ruihua.w@outlook.com",
+    "institutionalEmail": "ruihua.wang@hibiuh.edu.cn",
+    "website": "https://pandamology.github.io",
+    "orcid": "0009-0006-9876-4106",
+    "github": "pandamology",
+    "googleScholar": "https://scholar.google.com/citations?user=1VsPpn4AAAAJ&hl",
+    "arxiv": "https://arxiv.org/search/advanced?advanced=&terms-0-operator=AND&terms-0-term=ruihua+wang&terms-0-field=author&classification-mathematics=y&classification-physics_archives=all&classification-include_cross_list=include&date-filter_by=all_dates&date-year=&date-from_date=&date-to_date=&date-date_type=submitted_date&abstracts=show&size=50&order=-announced_date_first",
+    "avatar": "profile.png"
   },
-  "work": [],
-  "education": [
+  "profile": {
+    "researchInterests": "My research lies in analytic number theory and arithmetic geometry, with a particular interest in explicit and concrete problems arising in arithmetic contexts. I am especially interested in situations where geometric, analytic, and arithmetic ideas interact, and where abstract theories admit effective formulations and explicit computations. Some of my work also involves computational implementation in support of theoretical investigations.",
+    "industrySummary": "Before joining BiUH, I worked in industry as a 6G Researcher and a Blockchain Product Manager.",
+    "researchArea": "Number Theory"
+  },
+  "work": [
     {
-      "institution": "GitHub University",
-      "area": "Ph.D in Version Control Theory",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2018",
-      "gpa": null,
-      "courses": []
+      "id": "biuh-lecturer",
+      "position": "Lecturer",
+      "department": "Fundamental Science",
+      "organization": "Hainan Bielefeld University of Applied Sciences",
+      "organizationShort": "BiUH",
+      "url": "https://www.hainan-biuh.edu.cn/en/homepage/",
+      "startDate": "2025",
+      "endDate": ""
     },
     {
-      "institution": "GitHub University",
-      "area": "M.S. in Jekyll",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2014",
-      "gpa": null,
-      "courses": []
-    },
-    {
-      "institution": "GitHub University",
-      "area": "B.S. in GitHub",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2012",
-      "gpa": null,
-      "courses": []
+      "id": "huawei-engineer-product-manager",
+      "position": "Senior Engineer & Product Manager",
+      "organization": "Huawei",
+      "startDate": "2023",
+      "endDate": "2025"
     }
   ],
-  "skills": [],
-  "languages": [],
-  "interests": [],
-  "references": [],
+  "education": [
+    {
+      "id": "leiden-phd",
+      "degree": "Ph.D.",
+      "area": "Mathematics",
+      "institution": "Leiden University",
+      "url": "https://www.universiteitleiden.nl/en",
+      "department": "Mathematical Institute",
+      "departmentUrl": "https://www.universiteitleiden.nl/en/science/mathematics",
+      "endDate": "2022",
+      "supervisors": [
+        {
+          "name": "David Holmes",
+          "url": "https://davidholmes.nl/"
+        },
+        {
+          "name": "Robin de Jong",
+          "url": "https://pub.math.leidenuniv.nl/~jongrsde/"
+        }
+      ],
+      "supervisorRole": "Supervisors"
+    },
+    {
+      "id": "shandong-masters",
+      "degree": "M.S.",
+      "area": "Mathematics",
+      "institution": "Shandong University",
+      "url": "https://www.en.sdu.edu.cn/",
+      "department": "School of Mathematics",
+      "departmentUrl": "https://www.math.sdu.edu.cn/index.htm",
+      "endDate": "2018",
+      "supervisors": [
+        {
+          "name": "Jianya Liu",
+          "url": "http://www.prime.sdu.edu.cn/info/1023/1151.htm"
+        }
+      ],
+      "supervisorRole": "Supervisor"
+    },
+    {
+      "id": "shandong-bachelors",
+      "degree": "B.S.",
+      "area": "Mathematics",
+      "institution": "Shandong University",
+      "url": "https://www.en.sdu.edu.cn/",
+      "endDate": "2015",
+      "program": "Hua Loo-Keng Talent Program",
+      "supervisors": [
+        {
+          "name": "Ye Tian",
+          "url": "http://www.mcm.ac.cn/faculty/tianye/201409/t20140916_1092889.html"
+        }
+      ],
+      "supervisorRole": "Thesis Supervisor",
+      "thesisHost": "Chinese Academy of Sciences",
+      "thesisHostUrl": "https://english.amss.cas.cn/"
+    }
+  ],
   "publications": [
     {
-      "name": "Paper Title Number 1",
-      "publisher": "Journal 1",
-      "releaseDate": "2009-10-01",
-      "website": "https://academicpages.github.io/files/paper1.pdf",
-      "summary": "This paper is about the number 1. The number 2 is left for future work."
+      "id": "obstructions-coloring-arithmetic-graphs",
+      "title": "Obstructions to coloring arithmetic graphs",
+      "authors": [
+        {
+          "name": "Lujia Wang"
+        },
+        {
+          "name": "Ruihua Wang"
+        }
+      ],
+      "year": 2026,
+      "status": "preprint",
+      "arxiv": "2609.15081",
+      "url": "https://arxiv.org/pdf/2609.15081v1"
     },
     {
-      "name": "Paper Title Number 2",
-      "publisher": "Journal 1",
-      "releaseDate": "2010-10-01",
-      "website": "https://academicpages.github.io/files/paper2.pdf",
-      "summary": "This paper is about the number 2. The number 3 is left for future work."
+      "id": "large-zeta-sums-riemann-zeros",
+      "title": "Large zeta sums and zeros of the Riemann zeta function",
+      "authors": [
+        {
+          "name": "Zikang Dong",
+          "url": "https://zikangdong.github.io/"
+        },
+        {
+          "name": "Ruihua Wang"
+        },
+        {
+          "name": "Weijia Wang"
+        },
+        {
+          "name": "Hao Zhang",
+          "url": "https://grzy.hnu.edu.cn/site/index/zhanghao"
+        }
+      ],
+      "year": 2026,
+      "status": "preprint",
+      "arxiv": "2608.31060",
+      "url": "https://arxiv.org/pdf/2608.31060"
     },
     {
-      "name": "Paper Title Number 3",
-      "publisher": "Journal 1",
-      "releaseDate": "2015-10-01",
-      "website": "https://academicpages.github.io/files/paper3.pdf",
-      "summary": "This paper is about the number 3. The number 4 is left for future work."
+      "id": "large-values-quadratic-character-sums",
+      "title": "Large values of quadratic character sums",
+      "authors": [
+        {
+          "name": "Zikang Dong",
+          "url": "https://zikangdong.github.io/"
+        },
+        {
+          "name": "Ruihua Wang"
+        },
+        {
+          "name": "Weijia Wang"
+        },
+        {
+          "name": "Hao Zhang",
+          "url": "https://grzy.hnu.edu.cn/site/index/zhanghao"
+        },
+        {
+          "name": "Shengbo Zhao"
+        }
+      ],
+      "year": 2026,
+      "status": "preprint",
+      "arxiv": "2608.15773",
+      "url": "https://arxiv.org/pdf/2608.15773"
     },
     {
-      "name": "Paper Title Number 4",
-      "publisher": "GitHub Journal of Bugs",
-      "releaseDate": "2024-02-17",
-      "website": "https://academicpages.github.io/files/paper3.pdf",
-      "summary": "This paper is about fixing template issue #693."
+      "id": "large-values-quadratic-character-sums-revisited",
+      "title": "Large values of quadratic character sums revisited",
+      "authors": [
+        {
+          "name": "Zikang Dong",
+          "url": "https://zikangdong.github.io/"
+        },
+        {
+          "name": "Ruihua Wang"
+        },
+        {
+          "name": "Weijia Wang"
+        },
+        {
+          "name": "Hao Zhang",
+          "url": "https://grzy.hnu.edu.cn/site/index/zhanghao"
+        }
+      ],
+      "year": 2026,
+      "status": "preprint",
+      "arxiv": "2512.24147",
+      "url": "https://arxiv.org/abs/2512.24147",
+      "note": "Submitted for publication"
+    },
+    {
+      "id": "note-large-quadratic-character-sums",
+      "title": "Note on large quadratic character sums",
+      "authors": [
+        {
+          "name": "Zikang Dong",
+          "url": "https://zikangdong.github.io/"
+        },
+        {
+          "name": "Yutong Song"
+        },
+        {
+          "name": "Ruihua Wang"
+        },
+        {
+          "name": "Shengbo Zhao"
+        }
+      ],
+      "year": 2025,
+      "status": "preprint",
+      "arxiv": "2510.09005",
+      "url": "https://arxiv.org/abs/2510.09005",
+      "note": "Submitted for publication"
+    }
+  ],
+  "theses": [
+    {
+      "id": "gross-schoen-height-phd-thesis",
+      "title": "Explicit computation of the height of a Gross-Schoen cycle",
+      "year": 2022,
+      "url": "https://scholarlypublications.universiteitleiden.nl/handle/1887/3480346"
+    }
+  ],
+  "awards": [
+    {
+      "id": "hainan-high-level-talent-2026",
+      "title": "High-level Talent for Hainan Free Trade Port (Category E)",
+      "organization": "Hainan Province",
+      "date": "2026",
+      "homepage": true
+    },
+    {
+      "id": "four-talents-gathering-plan-2026",
+      "title": "Four Talents Gathering Plan",
+      "organization": "Hainan Province",
+      "date": "2026",
+      "homepage": true
+    },
+    {
+      "id": "csc-scholarship",
+      "title": "CSC Scholarship",
+      "startDate": "2018",
+      "date": "2022",
+      "homepage": false
+    },
+    {
+      "id": "chinese-mathematics-competition-2012",
+      "title": "2nd prize, The Chinese Mathematics (preliminary) Competitions",
+      "date": "2012",
+      "homepage": false
+    },
+    {
+      "id": "shandong-mathematics-competition-2012",
+      "title": "2nd prize, The Shandong Mathematics Competitions",
+      "date": "2012",
+      "homepage": false
+    },
+    {
+      "id": "national-mathematical-olympiad-2011",
+      "title": "2nd prize, The National Mathematical Olympiad in Senior",
+      "date": "2011",
+      "homepage": false
     }
   ],
   "presentations": [
     {
-      "name": "Talk 1 on Relevant Topic in Your Field",
-      "event": "UC San Francisco, Department of Testing",
-      "date": "2012-03-01",
-      "location": "San Francisco, CA, USA",
-      "description": ""
+      "id": "character-sums-weihai-2026",
+      "title": "Large values of quadratic character sums",
+      "event": "Shandong University (Weihai)",
+      "date": "2026-07",
+      "status": "past",
+      "homepage": true
     },
     {
-      "name": "Tutorial 1 on Relevant Topic in Your Field",
-      "event": "UC-Berkeley Institute for Testing Science",
-      "date": "2013-03-01",
-      "location": "Berkeley, CA, USA",
-      "description": ""
+      "id": "character-sums-jinan-2026",
+      "title": "Large values of quadratic character sums",
+      "event": "Shandong University (Jinan)",
+      "date": "2026-06",
+      "status": "past",
+      "homepage": true
     },
     {
-      "name": "Talk 2 on Relevant Topic in Your Field",
-      "event": "London School of Testing",
-      "date": "2014-02-01",
-      "location": "London, UK",
-      "description": ""
+      "id": "beilinson-bloch-height-soochow-2026",
+      "title": "Explicit computation of the Beilinson–Bloch height for non-hyperelliptic curves",
+      "event": "Number Theory Seminar, Soochow University",
+      "date": "2026-01",
+      "status": "past",
+      "homepage": true
     },
     {
-      "name": "Conference Proceeding talk 3 on Relevant Topic in Your Field",
-      "event": "Testing Institute of America 2014 Annual Conference",
-      "date": "2014-03-01",
-      "location": "Los Angeles, CA, USA",
-      "description": ""
+      "id": "number-theory-huawei-2023",
+      "title": "Number theory from scratch",
+      "event": "Knowledge Sharing Colloquium in Huawei",
+      "location": "Shanghai",
+      "date": "2023-08",
+      "status": "past",
+      "homepage": true
+    },
+    {
+      "id": "excellent-rings-leiden-2020",
+      "title": "Excellent rings",
+      "event": "Algebraic geometry seminar, Leiden University",
+      "date": "2020-10",
+      "status": "past",
+      "homepage": true
+    },
+    {
+      "id": "log-geometry-leiden-2020",
+      "title": "Log geometry seminar",
+      "event": "Leiden University",
+      "date": "2020",
+      "status": "past",
+      "homepage": false
+    },
+    {
+      "id": "ti-functors-formal-smoothness-leiden-2019",
+      "title": "Two talks on $T^i$ functors and formal smoothness",
+      "event": "Algebraic geometry seminar, Leiden University",
+      "date": "2019-06",
+      "status": "past",
+      "homepage": true
+    },
+    {
+      "id": "analysis-moduli-saarland-2019",
+      "title": "Analysis and moduli",
+      "event": "Around Moduli Spaces, Saarland University",
+      "date": "2019-04",
+      "status": "past",
+      "homepage": true
+    },
+    {
+      "id": "etale-cohomology-amsterdam-2019",
+      "title": "Étale cohomology seminar",
+      "event": "University of Amsterdam",
+      "date": "2019",
+      "status": "past",
+      "homepage": false
+    },
+    {
+      "id": "mobius-disjointness-shandong-2017",
+      "title": "Two talks on Möbius disjointness",
+      "event": "Advanced analytic number theory, Shandong University",
+      "date": "2017-05",
+      "status": "past",
+      "homepage": true
+    }
+  ],
+  "conferences": [
+    {
+      "id": "multiple-zeta-values-workshop-2026",
+      "title": "The 5th International Workshop on Multiple Zeta Values and Related Fields",
+      "location": "Changsha",
+      "date": "2026"
+    },
+    {
+      "id": "icm-2022",
+      "title": "International Congress of Mathematicians (ICM 2022)",
+      "location": "Zürich",
+      "date": "2022"
+    },
+    {
+      "id": "diamant-symposium-2018-2022",
+      "title": "Diamant Symposium",
+      "location": "The Netherlands",
+      "startDate": "2018",
+      "date": "2022",
+      "note": "Annually"
+    },
+    {
+      "id": "intercity-number-theory-geometry-2018-2022",
+      "title": "Intercity Number Theory / Geometry Seminar",
+      "location": "The Netherlands",
+      "startDate": "2018",
+      "date": "2022",
+      "note": "Regularly"
+    },
+    {
+      "id": "netherlands-mathematical-congress-2018-2022",
+      "title": "Netherlands Mathematical Congress",
+      "location": "The Netherlands",
+      "startDate": "2018",
+      "date": "2022",
+      "note": "Annually"
+    },
+    {
+      "id": "cmi-himr-summer-school-2021",
+      "title": "CMI-HIMR Summer School in Computational Number Theory",
+      "location": "Bristol",
+      "date": "2021"
+    },
+    {
+      "id": "arizona-winter-school-2020",
+      "title": "Arizona Winter School in Nonabelian Chabauty",
+      "location": "Tucson",
+      "date": "2020"
+    },
+    {
+      "id": "non-archimedean-tropical-geometry-2019",
+      "title": "Non-Archimedean and Tropical Geometry",
+      "location": "Regensburg",
+      "date": "2019"
+    },
+    {
+      "id": "chinese-academy-exchange-2014-2015",
+      "title": "Exchange program at the Chinese Academy of Sciences",
+      "location": "Beijing",
+      "startDate": "2014",
+      "date": "2015",
+      "note": "Supervised by Ye Tian"
     }
   ],
   "teaching": [
     {
-      "course": "Teaching experience 1",
-      "institution": "University 1, Department",
-      "date": "2014-01-01",
-      "role": "Undergraduate course",
-      "description": ""
+      "id": "biuh-math-i-fall-2026",
+      "course": "Math I (Single Variable Calculus)",
+      "institution": "BiUH",
+      "role": "Instructor",
+      "date": "2026",
+      "term": "Fall",
+      "homepage": true
     },
     {
-      "course": "Teaching experience 2",
-      "institution": "University 1, Department",
-      "date": "2015-01-01",
-      "role": "Workshop",
-      "description": ""
+      "id": "biuh-math-ii-spring-2026",
+      "course": "Math II (Multivariable Calculus and Linear Algebra)",
+      "institution": "BiUH",
+      "role": "Instructor",
+      "date": "2026",
+      "term": "Spring",
+      "homepage": true
+    },
+    {
+      "id": "biuh-math-i-fall-2025",
+      "course": "Math I (Single Variable Calculus)",
+      "institution": "BiUH",
+      "role": "Instructor",
+      "date": "2025",
+      "term": "Fall",
+      "homepage": true
+    },
+    {
+      "id": "leiden-algebraic-curves-fall-2021",
+      "course": "Algebraic Curves",
+      "institution": "Leiden University",
+      "role": "TA",
+      "date": "2021",
+      "term": "Fall",
+      "homepage": true
+    },
+    {
+      "id": "shandong-pde-spring-2017",
+      "course": "PDE",
+      "institution": "Shandong University",
+      "role": "TA",
+      "date": "2017",
+      "term": "Spring",
+      "homepage": true
+    },
+    {
+      "id": "shandong-basic-number-theory-fall-2016",
+      "course": "Basic Number Theory",
+      "institution": "Shandong University",
+      "role": "TA",
+      "date": "2016",
+      "term": "Fall",
+      "homepage": true
     }
   ],
-  "portfolio": [
+  "supervision": [
     {
-      "name": "Portfolio item number 1",
-      "category": "portfolio",
-      "date": "",
-      "url": "",
-      "description": "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
+      "id": "crazy-sports-intern-mentor-2026",
+      "role": "Intern mentor",
+      "organization": "Crazy Sports Group Limited",
+      "date": "2026"
+    },
+    {
+      "id": "crazy-sports-intern-mentor-2025",
+      "role": "Intern mentor",
+      "organization": "Crazy Sports Group Limited",
+      "date": "2025"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Languages",
+      "items": [
+        "Chinese (native)",
+        "English (fluent)"
+      ]
+    },
+    {
+      "name": "Programming",
+      "items": [
+        "LaTeX",
+        "SageMath",
+        "Magma",
+        "Python"
+      ]
     }
   ]
 }

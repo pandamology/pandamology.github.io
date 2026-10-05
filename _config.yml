@@ -12,73 +12,15 @@ site_theme               : "default" # The available themes options are "default
 title                    : "Home"
 title_separator          : "-"
 # name                     : &name "Ruihua Wang"
-description              : &description "Doctor Lecturer | Arithmetic Geometry"   # Update this with a general description of your site, this is the default if not overridden by a page
+description              : &description "Academic website"   # Update this with a general description of your site, this is the default if not overridden by a page
 url                      : https://pandamology.github.io # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
                                                            # or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "pandamology/pandamology.github.io"
 
-# Site Author - The following control what appear as part of the author content on the side bar.
-#               If a field is blank the icon and link will not appear, otherwise it will be shown.
-#               Additional customization can be done by editing /_includes/author-profile.html
-author:
-  # Biographic information
-  avatar           : "profile.png"
-#  name             : "Ruihua Wang"
-  pronouns         : # example: "he/him"  
-#  bio              : "Interested in explicit aspects of number theory."
-  uri              : # URL
-  email            : "ruihua.wang@hibiuh.edu.cn" 
-
-  # Academic websites
-  academia         : # URL
-  arxiv            : "https://arxiv.org/search/advanced?advanced=&terms-0-operator=AND&terms-0-term=ruihua+wang&terms-0-field=author&classification-mathematics=y&classification-physics_archives=all&classification-include_cross_list=include&date-filter_by=all_dates&date-year=&date-from_date=&date-to_date=&date-date_type=submitted_date&abstracts=show&size=50&order=-announced_date_first"
-  googlescholar    : "https://scholar.google.com/citations?user=1VsPpn4AAAAJ&hl"
-  inspire-hep      : # URL
-  impactstory      : # URL
-  orcid            : "https://orcid.org/0009-0006-9876-4106"
-  semantic         : # URL
-  ssrn             : # URL
-  pubmed           : # URL
-  researchgate     : # URL
-  scopus           : # URL
-  zotero           : # URL
-
-
-  # Repositories and software development
-  bitbucket        : # Username - Update with your username on the site
-  codepen          : # Username
-  dribbble         : # Username
-  github           : "pandamology"
-  kaggle           : # Username  
-  stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
-
-  # Social media
-  artstation       : # Username
-  bluesky          : # Username
-  facebook         : # Username
-  flickr           : # Username
-  foursquare       : # Username
-  goodreads        : # Username
-  google_plus      : # Username
-  keybase          : # Username
-  instagram        : # Username
-  lastfm           : # Username
-  linkedin         : # Username
-  mastodon         : # URL
-  medium           : # URL
-  pinterest        : # Username
-  soundcloud       : # Username
-  steam            : # Username
-  telegram         : # URL
-  tumblr           : # Username
-  twitter          : # Username for X / Twitter
-  vine             : # Username
-  weibo            : # Username
-  wikipedia        : # Username
-  xing             : # Username
-  youtube          : # Username
-  zhihu            : # Username
+# Personal metadata is derived from _data/cv.json by scripts/prepare_build.py.
+# Use _config.yml,build/cv-config.yml when building or serving the website.
+author: {}
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
@@ -164,6 +106,12 @@ include:
   - _pages
   - files
 exclude:
+  - build
+  - scripts
+  - templates
+  - docs
+  - Gemfile.lock
+  - README.md
   - "*.sublime-project"
   - "*.sublime-workspace"
   - .asset-cache

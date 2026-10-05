@@ -1,0 +1,5 @@
+<li data-cv-id="{{ include.paper.id | escape }}">
+  {% include cv/people.html people=include.paper.authors highlight=true %}<br>
+  <em>{% include cv/link.html text=include.paper.title url=include.paper.url %}</em><br>
+  {% if include.paper.journal %}<em>{{ include.paper.journal | escape }}</em>, {% endif %}{% if include.paper.status == 'accepted' %}accepted, {% endif %}{{ include.paper.year | escape }}{% if include.paper.arxiv %}; arXiv: <a href="{{ include.paper.arxiv | prepend: 'https://arxiv.org/abs/' | escape }}">{{ include.paper.arxiv | escape }}</a>{% endif %}{% if include.paper.note %}. {{ include.paper.note | escape }}{% endif %}
+</li>
