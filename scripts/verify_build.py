@@ -15,6 +15,7 @@ import sys
 import unicodedata
 
 from prepare_build import ROOT, SECTIONS, load_cv
+from cv_structure import visible_keys, layout_sections
 
 
 class Page(HTMLParser):
@@ -106,7 +107,10 @@ def main():
         "presentations": ("title",), "conferences": ("title",),
         "teaching": ("course",), "supervision": ("organization",),
     }
+    visible = visible_keys(data)
     for section, keys in text_keys.items():
+        if section not in visible:
+            continue
         for record in data[section]:
             for key in keys:
                 expect(normalized(record[key]) in pdf_text, f"PDF is missing {section}/{record['id']}: {key}")
@@ -116,9 +120,22 @@ def main():
                            f"PDF is missing an author for {record['id']}")
                 if record.get("arxiv"):
                     expect(normalized(record["arxiv"]) in pdf_text, f"PDF is missing arXiv identifier for {record['id']}")
-    for group in data["skills"]:
+    for group in data["skills"] if "skills" in visible else []:
         for item in group["items"]:
             expect(normalized(item) in pdf_text, f"PDF is missing skill {item!r}")
+    for group in data.get("customSections", []):
+        if "custom:" + group["id"] not in visible:
+            continue
+        for record in group["items"]:
+            for field in ("title", "date", "organization", "description"):
+                value = record.get(field, "")
+                if value:
+                    expect(normalized(value) in pdf_text, f"PDF is missing custom section {group['id']}: {field}")
+    populated = {key for key in SECTIONS if data[key]}
+    populated |= {"custom:" + group["id"] for group in data.get("customSections", []) if group["items"]}
+    for setting in layout_sections(data):
+        if setting["visible"] and setting["key"] in populated:
+            expect(normalized(setting["title"]) in pdf_text, f"PDF is missing section heading {setting['title']!r}")
     source_page = (args.site / "index.html").read_text(encoding="utf-8")
     expect(normalized(data["profile"]["researchInterests"]) in normalized(" ".join(Page(source_page).words)),
            "Homepage research statement differs from the shared data")

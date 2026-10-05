@@ -25,8 +25,10 @@ sitemap: false
     </ol>
     <p>填写和下载不会立即修改网站；GitHub 提交后才会发布。你无需上传 PDF。新增内容可能使 PDF 自然增加页数。</p>
     <p>发布失败时线上保留上一次成功版本。可以回到这个页面修正资料后重新提交；旧资料可在 GitHub 的文件历史中找回。</p>
+    <p>在“CV 栏目与顺序”中可新增栏目、修改栏目标题、隐藏或调整顺序。这些设置作用于 PDF CV；首页及 Publications、Talks、Teaching 的展示设置保持独立。隐藏不会删除资料，隐藏内容仍保存在公开仓库中。新增栏目采用“时间、标题、机构、补充说明”的通用格式，发布后出现在 CV PDF 内。</p>
   </details>
   <div class="selector"><label for="editor-section">我要更新</label><select id="editor-section" disabled></select><button id="add-record" hidden>新增记录</button></div>
+  <div id="cv-structure" hidden></div>
   <div id="editor-fields"></div>
   <div class="import-row"><button id="save-draft" disabled>保存草稿</button><label class="button" for="import-cv">载入更新文件或草稿</label><input id="import-cv" type="file" accept=".json,application/json"><button id="reload-cv">重新读取线上资料</button></div>
   <p class="muted">未下载的修改只保留在当前页面，关闭或刷新前请先下载。资料文件中的网页链接仍用于其他页面，但不会成为 PDF 的超链接。</p>

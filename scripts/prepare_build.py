@@ -14,6 +14,8 @@ import sys
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
+from cv_structure import validate_structure
+
 ROOT = Path(__file__).resolve().parents[1]
 SECTIONS = (
     "work", "education", "publications", "theses", "awards", "presentations",
@@ -129,7 +131,7 @@ def validate_cv(data):
                 check_links(item, f"{label}[{index}]")
 
     check_links(data)
-    return data
+    return validate_structure(data)
 
 
 def load_cv(path: Path):

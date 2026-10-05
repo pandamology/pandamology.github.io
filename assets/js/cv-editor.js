@@ -10,6 +10,8 @@
   };
   const required = {basics:['name','email','institutionalEmail','website','orcid','avatar'],profile:['researchInterests','industrySummary','researchArea'],work:['position','organization','startDate'],education:['degree','area','institution','endDate','supervisorRole'],publications:['title','year','status'],theses:['title','year','url'],awards:['title','date'],presentations:['title','event','date','status'],conferences:['title','date'],teaching:['course','institution','role','date'],supervision:['role','organization','date'],skills:['name']};
   const source = 'https://raw.githubusercontent.com/pandamology/pandamology.github.io/master/_data/cv.json';
+  const builtinTitles={work:'Employment',education:'Education',publications:'Publications',theses:'Thesis',awards:'Grants and Awards',presentations:'Seminars and Talks',conferences:'Conferences and Research Visits',teaching:'Teaching',supervision:'Student Supervision',skills:'Skills'};
+  const customFields=['date','title','organization','description'];
   const $ = id => document.getElementById(id);
   let data, base, changed = false, section = 'publications', busy = false;
   function node(tag,text,className){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(className)e.className=className;return e;}
@@ -17,6 +19,22 @@
   function dirty(){changed=true;message('有尚未提交的修改。填写完成后，请下载更新文件并在 GitHub 上传提交。');}
   function download(filename){const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=node('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}
   function button(text,fn){const b=node('button',text);b.type='button';b.addEventListener('click',fn);return b;}
+  function layout(){return data.cvLayout?.sections||Object.entries(builtinTitles).map(([key,title])=>({key,title,visible:true}));}
+  function ensureLayout(){if(!data.cvLayout)data.cvLayout={sections:layout()};if(!data.customSections)data.customSections=[];return data.cvLayout.sections;}
+  function customGroup(key){return data.customSections.find(g=>'custom:'+g.id===key);}
+  function rebuildSelector(){const select=$('editor-section');select.replaceChildren();for(const [v,t] of Object.entries(sections)){const o=node('option',t);o.value=v;select.append(o);}const settings=node('option','CV 栏目与顺序');settings.value='structure';select.append(settings);for(const g of data.customSections||[]){const entry=layout().find(x=>x.key==='custom:'+g.id);const o=node('option','自定义栏目：'+(entry?.title||'未命名'));o.value='custom:'+g.id;select.append(o);}select.value=section;}
+  function structure(){
+    const root=$('cv-structure');root.replaceChildren();root.append(node('p','调整 PDF CV 的栏目标题、显示状态和顺序。隐藏不会删除资料，也不会使公开仓库中的内容变为私密。'));
+    layout().forEach((entry,i)=>{const row=node('div',undefined,'structure-row');const field=node('div',undefined,'field');const label=node('label','栏目标题');const input=node('input');input.type='text';input.id='cv-structure-title-'+i;label.htmlFor=input.id;input.value=entry.title;input.addEventListener('input',()=>{ensureLayout()[i].title=input.value;dirty();rebuildSelector();});field.append(label,input,node('p',entry.key.startsWith('custom:')?'自定义栏目':sections[entry.key],'muted'));const actions=node('div',undefined,'structure-actions');const check=node('input');check.type='checkbox';check.checked=entry.visible;check.id='cv-structure-visible-'+i;check.addEventListener('change',()=>{ensureLayout()[i].visible=check.checked;dirty();});const visibleLabel=node('label');visibleLabel.htmlFor=check.id;visibleLabel.append(check,node('span','显示在 CV'));
+      const up=button('上移',()=>{const rows=ensureLayout();[rows[i-1],rows[i]]=[rows[i],rows[i-1]];dirty();render();});up.disabled=i===0;const down=button('下移',()=>{const rows=ensureLayout();[rows[i+1],rows[i]]=[rows[i],rows[i+1]];dirty();render();});down.disabled=i===layout().length-1;actions.append(visibleLabel,up,down);
+      if(entry.key.startsWith('custom:'))actions.append(button('编辑内容',()=>{section=entry.key;rebuildSelector();render();}),button('删除栏目',()=>{if(!window.confirm('删除此栏目及其记录？若只想暂时不显示，请取消并关闭“显示在 CV”。'))return;data.customSections=data.customSections.filter(g=>'custom:'+g.id!==entry.key);data.cvLayout.sections=ensureLayout().filter(x=>x.key!==entry.key);dirty();rebuildSelector();render();}));row.append(field,actions);root.append(row);});
+    root.append(button('新增栏目',()=>{const entries=ensureLayout();const id='section-'+crypto.randomUUID();data.customSections.push({id,items:[]});entries.push({key:'custom:'+id,title:'New Section',visible:true});dirty();rebuildSelector();render();}));
+  }
+  function validateStructure(d){
+    const errors=[],groups=d.customSections??[];if(!Array.isArray(groups))return ['自定义栏目格式不正确。'];const expected=new Set(Object.keys(builtinTitles));const ids=new Set(Object.keys(builtinTitles).flatMap(k=>(d[k]||[]).map(r=>r?.id)));
+    for(const g of groups){if(!g||typeof g.id!=='string'||! /^[A-Za-z0-9][A-Za-z0-9-]*$/.test(g.id)){errors.push('自定义栏目缺少有效标识。');continue;}const key='custom:'+g.id;if(expected.has(key))errors.push('自定义栏目标识重复。');expected.add(key);if(!Array.isArray(g.items)){errors.push('自定义栏目缺少内容列表。');continue;}for(const r of g.items){if(!r||typeof r!=='object'||Array.isArray(r)){errors.push('自定义栏目记录格式不正确。');continue;}if(typeof r.id!=='string'||!r.id.trim()||ids.has(r.id))errors.push('自定义记录标识缺失或重复。');ids.add(r.id);if(typeof r.title!=='string'||!r.title.trim())errors.push('自定义栏目中的记录需要填写标题。');for(const k of ['date','organization','description'])if(k in r&&typeof r[k]!=='string')errors.push('自定义栏目的时间、机构和补充说明应为文字。');}}
+    if(d.cvLayout===undefined){if(groups.length)errors.push('自定义栏目缺少 CV 栏目设置。');return errors;}if(!d.cvLayout||!Array.isArray(d.cvLayout.sections))return [...errors,'CV 栏目设置格式不正确。'];const seen=new Set();for(const e of d.cvLayout.sections){if(!e||typeof e.key!=='string'||!expected.has(e.key)||seen.has(e.key)){errors.push('CV 栏目缺失、重复或无法识别。');continue;}seen.add(e.key);if(typeof e.title!=='string'||!e.title.trim())errors.push('请填写每个 CV 栏目的标题。');if(typeof e.visible!=='boolean')errors.push('请设置每个 CV 栏目是否显示。');}if(seen.size!==expected.size)errors.push('CV 栏目设置应包含所有现有栏目，隐藏请使用显示开关。');return errors;
+  }
   function validDate(s){if(!/^\d{4}(?:-\d{2})?(?:-\d{2})?$/.test(s))return false;const [y,m=1,d=1]=s.split('-').map(Number);const t=new Date(Date.UTC(y,m-1,d));return t.getUTCFullYear()===y&&t.getUTCMonth()===m-1&&t.getUTCDate()===d;}
   function validate(d){
     const errors=[];
@@ -45,18 +63,18 @@
     }
     if(d.basics){for(const k of ['email','institutionalEmail'])if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.basics[k]||''))errors.push('请填写有效邮箱。');if(!/^\d{4}-\d{4}-\d{4}-[\dX]{4}$/.test(d.basics.orcid||''))errors.push('ORCID 应为 0000-0000-0000-0000 格式。');}
     function links(v){if(!v||typeof v!=='object')return;for(const [k,x] of Object.entries(v)){if(typeof x==='string'&&x&&(k.toLowerCase().endsWith('url')||['website','googleScholar'].includes(k)||k==='arxiv'&&x.includes('://'))){try{const u=new URL(x);if(!['https:','http:'].includes(u.protocol))throw Error();}catch{errors.push((labels[k]||k)+'：请填写完整的 http:// 或 https:// 地址。');}}if(x&&typeof x==='object')links(x);}}
-    links(d);return [...new Set(errors)];
+    links(d);errors.push(...validateStructure(d));return [...new Set(errors)];
   }
   function field(record,key,parent,index){
     if(key==='authors'||key==='supervisors'){people(record,key,parent,index);return;}
-    const wrap=node('div',undefined,'field');const id='cv-'+section+'-'+index+'-'+key;const label=node('label',(section==='skills'&&key==='name'?'分类名称':labels[key]||key)+(required[section]?.includes(key)?' *':''));label.htmlFor=id;
+    const custom=section.startsWith('custom:');const wrap=node('div',undefined,'field');const id='cv-'+section+'-'+index+'-'+key;const label=node('label',(custom&&key==='date'?'时间（可不填，如 2027 或 Spring 2027）':custom&&key==='description'?'补充说明（每行一段）':section==='skills'&&key==='name'?'分类名称':labels[key]||key)+((custom?key==='title':required[section]?.includes(key))?' *':''));label.htmlFor=id;
     let input;
     if(key==='homepage'){input=node('input');input.type='checkbox';input.checked=record[key]===true;}
     else if(key==='status'||key==='term'){
       input=node('select');const options=key==='term'?{'':'未指定',Spring:'Spring（春季）',Summer:'Summer（夏季）',Fall:'Fall（秋季）',Winter:'Winter（冬季）'}:section==='publications'?{preprint:'预印本',accepted:'已接收',published:'已发表'}:{past:'已完成',upcoming:'即将举行'};
       if(record[key]&&!Object.hasOwn(options,record[key]))options[record[key]]=record[key];
       for(const [v,t] of Object.entries(options)){const o=node('option',t);o.value=v;input.append(o);}input.value=record[key]||'';
-    }else if(['researchInterests','industrySummary','summary','note','items'].includes(key)){input=node('textarea');input.value=key==='items'?(record[key]||[]).join('\n'):record[key]||'';wrap.classList.add('wide');}
+    }else if(['researchInterests','industrySummary','summary','note','items','description'].includes(key)){input=node('textarea');input.value=key==='items'?(record[key]||[]).join('\n'):record[key]||'';wrap.classList.add('wide');}
     else{input=node('input');input.type=key==='year'?'number':'text';input.value=record[key]??'';if(key==='year'){input.min='1000';input.max='9999';}if(['date','startDate','endDate'].includes(key))input.placeholder='2027 或 2027-03 或 2027-03-15';}
     input.id=id;input.addEventListener(key==='homepage'||key==='status'||key==='term'?'change':'input',()=>{record[key]=key==='homepage'?input.checked:key==='year'?(input.value===''?null:Number(input.value)):key==='items'?input.value.split('\n').map(s=>s.trim()).filter(Boolean):input.value;dirty();});wrap.append(label,input);parent.append(wrap);
   }
@@ -67,9 +85,9 @@
   }
   function title(r,i){return r.title||r.course||r.position||r.degree||r.name||r.role||'新记录 '+(i+1);}
   function render(){
-    const root=$('editor-fields');root.replaceChildren();const single=['basics','profile'].includes(section);$('add-record').hidden=single;
-    const rows=single?[data[section]]:data[section];
-    rows.forEach((r,i)=>{const card=node(single?'div':'details',undefined,'record');if(!single){card.open=i===0;card.append(node('summary',title(r,i)));}const grid=node('div',undefined,'grid');for(const k of schemas[section])field(r,k,grid,i);card.append(grid);
+    const root=$('editor-fields');root.replaceChildren();$('cv-structure').hidden=section!=='structure';const single=['basics','profile'].includes(section);$('add-record').hidden=single||section==='structure';
+    if(section==='structure'){structure();return;}const custom=section.startsWith('custom:');const rows=custom?customGroup(section).items:single?[data[section]]:data[section];
+    rows.forEach((r,i)=>{const card=node(single?'div':'details',undefined,'record');if(!single){card.open=i===0;card.append(node('summary',title(r,i)));}const grid=node('div',undefined,'grid');for(const k of custom?customFields:schemas[section])field(r,k,grid,i);card.append(grid);
       if(!single){const actions=node('div',undefined,'row-actions');actions.append(button('上移',()=>{if(i){[rows[i-1],rows[i]]=[rows[i],rows[i-1]];dirty();render();}}),button('下移',()=>{if(i<rows.length-1){[rows[i+1],rows[i]]=[rows[i],rows[i+1]];dirty();render();}}),button('删除记录',()=>{if(window.confirm('删除“'+title(r,i)+'”？尚未提交前不会影响线上网站。')){rows.splice(i,1);dirty();render();}}));card.append(actions);}root.append(card);
     });
     if(!rows.length)root.append(node('p','还没有记录，点击“新增记录”开始填写。'));
@@ -78,17 +96,17 @@
   async function load(){
     if(changed&&!window.confirm('重新读取会放弃当前未下载的修改，是否继续？'))return;
     busy=true;$('export-cv').disabled=true;message('正在读取最新资料…');
-    try{const d=await remote();const errors=validate(d);if(errors.length)throw Error(errors.join('\n'));base=JSON.stringify(d);data=structuredClone(d);changed=false;render();$('editor-section').disabled=false;$('export-cv').disabled=false;$('save-draft').disabled=false;message('已读取最新资料。请选择内容并填写，完成后下载更新文件。');}catch(e){message(e.message+'。可重试，或载入之前下载的资料文件。',true);}finally{busy=false;}
+    try{const d=await remote();const errors=validate(d);if(errors.length)throw Error(errors.join('\n'));base=JSON.stringify(d);data=structuredClone(d);changed=false;if(section.startsWith('custom:')&&!data.customSections?.some(g=>'custom:'+g.id===section))section='structure';rebuildSelector();render();$('editor-section').disabled=false;$('export-cv').disabled=false;$('save-draft').disabled=false;message('已读取最新资料。请选择内容并填写，完成后下载更新文件。');}catch(e){message(e.message+'。可重试，或载入之前下载的资料文件。',true);}finally{busy=false;}
   }
   for(const [v,t] of Object.entries(sections)){const o=node('option',t);o.value=v;$('editor-section').append(o);}$('editor-section').value=section;
   $('editor-section').addEventListener('change',()=>{section=$('editor-section').value;render();});
-  $('add-record').addEventListener('click',()=>{const r={};for(const k of schemas[section])r[k]=k==='homepage'?true:['authors','supervisors','items'].includes(k)?[]:k==='year'?new Date().getFullYear():'';if(section!=='skills')r.id=section+'-'+crypto.randomUUID();if(section==='publications'){r.status='preprint';r.authors=[{name:''}];}if(section==='presentations')r.status='past';data[section].unshift(r);dirty();render();});
+  $('add-record').addEventListener('click',()=>{const custom=section.startsWith('custom:');const r={};for(const k of custom?customFields:schemas[section])r[k]=k==='homepage'?true:['authors','supervisors','items'].includes(k)?[]:k==='year'?new Date().getFullYear():'';if(section!=='skills')r.id=(custom?'custom-item':section)+'-'+crypto.randomUUID();if(section==='publications'){r.status='preprint';r.authors=[{name:''}];}if(section==='presentations')r.status='past';(custom?customGroup(section).items:data[section]).unshift(r);dirty();render();});
   $('export-cv').addEventListener('click',async()=>{
     if(busy||!data)return;const errors=validate(data);if(errors.length){message('请先补全或修正以下内容：\n'+errors.join('\n'),true);return;}
     busy=true;$('export-cv').disabled=true;
     try{const latest=await remote();if(base&&JSON.stringify(latest)!==base)throw Error('线上资料已变化。请先保存草稿，再重新读取最新资料并应用改动，避免覆盖其他更新。');download('cv.json');changed=false;message('已下载 cv.json。现在点击“打开 GitHub 上传”，上传该文件并提交到 master。下载本身还没有发布。');}catch(e){message(e.message,true);}finally{busy=false;$('export-cv').disabled=false;}
   });
-  $('import-cv').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;if(changed&&!window.confirm('载入文件会替换当前未下载的修改，是否继续？'))return;try{const d=JSON.parse(await f.text());if(!d||d.schemaVersion!==1||!d.basics||!d.profile||Object.keys(sections).filter(s=>!['basics','profile'].includes(s)).some(s=>!Array.isArray(d[s])||d[s].some(r=>!r||typeof r!=='object'||Array.isArray(r))))throw Error('请选择本站导出的更新文件或草稿。');const errors=validate(d);data=d;changed=true;$('editor-section').disabled=false;$('export-cv').disabled=false;$('save-draft').disabled=false;render();message(errors.length?'已载入草稿。完成填写后才能下载正式更新文件：\n'+errors.join('\n'):'已载入文件。请核对内容后下载并上传到 GitHub。',errors.length>0);}catch(err){message('载入失败：'+err.message,true);}e.target.value='';});
+  $('import-cv').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;if(changed&&!window.confirm('载入文件会替换当前未下载的修改，是否继续？'))return;try{const d=JSON.parse(await f.text());if(!d||d.schemaVersion!==1||!d.basics||typeof d.basics!=='object'||Array.isArray(d.basics)||!d.profile||typeof d.profile!=='object'||Array.isArray(d.profile)||Object.keys(sections).filter(s=>!['basics','profile'].includes(s)).some(s=>!Array.isArray(d[s])||d[s].some(r=>!r||typeof r!=='object'||Array.isArray(r)))||(d.customSections!==undefined&&(!Array.isArray(d.customSections)||d.customSections.some(g=>!g||typeof g.id!=='string'||!Array.isArray(g.items)||g.items.some(r=>!r||typeof r!=='object'||Array.isArray(r)))))||(d.cvLayout!==undefined&&(!d.cvLayout||!Array.isArray(d.cvLayout.sections)||d.cvLayout.sections.some(x=>!x||typeof x.key!=='string'||typeof x.title!=='string'||typeof x.visible!=='boolean'))))throw Error('请选择本站导出的更新文件或草稿。');const errors=validate(d);data=d;changed=true;if(section.startsWith('custom:')&&!data.customSections?.some(g=>'custom:'+g.id===section))section='structure';rebuildSelector();$('editor-section').disabled=false;$('export-cv').disabled=false;$('save-draft').disabled=false;render();message(errors.length?'已载入草稿。完成填写后才能下载正式更新文件：\n'+errors.join('\n'):'已载入文件。请核对内容后下载并上传到 GitHub。',errors.length>0);}catch(err){message('载入失败：'+err.message,true);}e.target.value='';});
   $('save-draft').addEventListener('click',()=>{if(!data)return;download('cv-draft.json');changed=false;message('已保存草稿 cv-draft.json。可稍后载入继续填写；请勿将草稿直接上传到 GitHub。');});
   $('reload-cv').addEventListener('click',load);
   window.addEventListener('beforeunload',e=>{if(changed){e.preventDefault();e.returnValue='';}});

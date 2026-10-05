@@ -62,10 +62,20 @@ jobs:
       - name: Install PDF compiler and inspection tools
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-extra texlive-fonts-recommended fonts-texgyre fonts-lmodern poppler-utils
+          sudo apt-get install -y --no-install-recommends texlive-xetex texlive-latex-extra texlive-fonts-recommended texlive-lang-chinese fonts-noto-cjk fonts-texgyre fonts-lmodern poppler-utils
 
       - name: Validate the shared CV and derive website metadata
         run: python scripts/prepare_build.py
+
+      - name: Check custom CV sections, visibility and ordering
+        run: python scripts/test_cv_structure.py --compile-pdf
+
+      - name: Save the custom-section PDF test preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-structure-preview
+          path: build/structure-preview.pdf
+          retention-days: 3
 
       - name: Generate the PDF from the shared CV
         run: |

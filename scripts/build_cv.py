@@ -29,6 +29,8 @@ import subprocess
 import sys
 import tempfile
 
+from cv_structure import BUILTIN_TITLES, layout_sections, validate_structure
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SECTIONS = (
@@ -252,7 +254,29 @@ def render_sections(data: dict, as_of: str) -> str:
         row(text(entry["name"]), sentence([text(item) for item in entry["items"]], "; "))
         for entry in data["skills"]
     ]))
-    return "\n".join(section for section in sections if section)
+    rendered = dict(zip(BUILTIN_TITLES, sections))
+    customs = {"custom:" + group["id"]: group for group in data.get("customSections", [])}
+    ordered = []
+    for setting in layout_sections(data):
+        if not setting["visible"]:
+            continue
+        key = setting["key"]
+        if key in rendered:
+            body = rendered[key]
+            heading = "\\cvsection{" + BUILTIN_TITLES[key] + "}"
+            body = body.replace(heading, "\\cvsection{" + text(setting["title"]) + "}", 1)
+        else:
+            entries = []
+            for entry in customs[key]["items"]:
+                body = sentence([emphasis(entry["title"]), text(entry.get("organization", ""))])
+                for line in entry.get("description", "").splitlines():
+                    if line.strip():
+                        body += detail(text(line))
+                entries.append(row(text(entry.get("date", "")), body))
+            body = section(text(setting["title"]), entries)
+        if body:
+            ordered.append(body)
+    return "\n".join(ordered)
 
 
 def load_data(path: Path) -> dict:
@@ -277,7 +301,7 @@ def load_data(path: Path) -> dict:
             raise ValueError(f"Unknown publication status: {publication.get('status')!r}")
         if not publication.get("authors"):
             raise ValueError(f"A publication needs an ordered author list: {publication.get('id')}")
-    return data
+    return validate_structure(data)
 
 
 def make_tex(data: dict, updated: date, template: Path, as_of: date | None = None) -> str:
