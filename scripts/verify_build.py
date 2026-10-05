@@ -22,6 +22,7 @@ class Page(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.record_ids = []
         self.links = []
+        self.pdf_previews = []
         self.data_hashes = []
         self.words = []
         self.hidden_depth = 0
@@ -35,6 +36,8 @@ class Page(HTMLParser):
             self.record_ids.append(attrs["data-cv-id"])
         if "data-cv-sha256" in attrs:
             self.data_hashes.append(attrs["data-cv-sha256"])
+        if tag == "iframe" and attrs.get("src"):
+            self.pdf_previews.append(attrs["src"])
         if tag == "a" and attrs.get("href"):
             self.links.append(attrs["href"])
 
@@ -79,7 +82,8 @@ def main():
         filename = args.site / name / "index.html"
         expect(filename.is_file(), f"Missing page: {filename}")
         pages[name] = Page(filename.read_text(encoding="utf-8"))
-    check_ids(pages["cv"], records, "CV page")
+    expect(pages["cv"].pdf_previews == ["/files/CV.pdf"], "CV page must embed the canonical PDF preview")
+    expect(not pages["cv"].record_ids, "CV page must show the PDF instead of an HTML record list")
     check_ids(pages["publications"], data["publications"] + data["theses"], "Publications page")
     check_ids(pages["talks"], [row for row in data["presentations"] if row.get("homepage", True)], "Talks page")
     check_ids(pages["teaching"], [row for row in data["teaching"] if row.get("homepage", True)], "Teaching page")
@@ -90,6 +94,10 @@ def main():
     expect(pdf.stat().st_size > 5000, "Generated PDF is unexpectedly small")
     result = subprocess.run(["pdftotext", "-enc", "UTF-8", str(pdf), "-"], capture_output=True, text=True, check=True)
     pdf_text = normalized(result.stdout)
+    domain = data["basics"]["website"].removeprefix("https://").removeprefix("http://").rstrip("/")
+    expect(normalized(domain) not in pdf_text, "PDF must not display the personal domain")
+    urls = subprocess.run(["pdfinfo", "-url", str(pdf)], capture_output=True, text=True, check=True)
+    expect(not re.search(r"(?:https?://|mailto:)", urls.stdout), "PDF must not contain hyperlink annotations")
     expect(normalized(data["basics"]["name"]) in pdf_text, "PDF is missing the owner's name")
     expect(normalized(data["basics"]["email"]) in pdf_text, "PDF is missing the contact email")
     text_keys = {

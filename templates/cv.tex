@@ -7,8 +7,8 @@
 \usepackage{amsmath}
 \usepackage{xcolor}
 \definecolor{cvlink}{HTML}{174B72}
-\usepackage{hyperref}
-\hypersetup{colorlinks=true,urlcolor=cvlink,linkcolor=cvlink,
+\usepackage[draft]{hyperref}
+\hypersetup{hidelinks,
   pdftitle={@@PDF_TITLE@@},pdfauthor={@@NAME@@},pdfsubject={Curriculum vitae}}
 \urlstyle{same}
 \usepackage{enumitem}
@@ -48,8 +48,7 @@
 \thispagestyle{firstpage}
 \begin{center}
   {\LARGE\bfseries @@NAME@@}\par\vspace{4pt}
-  {\small @@CONTACT@@}\par\vspace{2pt}
-  {\small @@WEBSITE@@}
+  {\small @@CONTACT@@}
 \end{center}
 \vspace{-1pt}\hrule\vspace{3pt}
 @@SECTIONS@@

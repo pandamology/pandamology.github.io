@@ -28,7 +28,6 @@ import shutil
 import subprocess
 import sys
 import tempfile
-from urllib.parse import quote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -70,19 +69,8 @@ def title(value: str) -> str:
 
 
 def link(url: str | None, label: str, *, rendered: bool = False) -> str:
-    label = label if rendered else text(label)
-    if not url:
-        return label
-    if urlsplit(url).scheme not in {"https", "http", "mailto"}:
-        raise ValueError(f"Unsupported link scheme: {url!r}")
-    # Percent-encode braces, backslashes, whitespace, and non-ASCII URL data
-    # before escaping TeX metacharacters. No input becomes a TeX instruction.
-    url = quote(url, safe=":/?&=+#%~@.!-_$*'(),;[]")
-    # Hyperref reads URL tildes itself. \textasciitilde{} would leave literal
-    # braces in the resulting link, so URL escaping is separate from labels.
-    url_escapes = {char: "\\" + char for char in "%#&_$"}
-    encoded = "".join(url_escapes.get(char, char) for char in url)
-    return rf"\href{{{encoded}}}{{{label}}}"
+    """Render PDF labels as plain text, with no clickable links."""
+    return label if rendered else text(label)
 
 
 def emphasis(value: str) -> str:
@@ -297,12 +285,10 @@ def make_tex(data: dict, updated: date, template: Path, as_of: date | None = Non
     orcid = basics["orcid"].removeprefix("https://orcid.org/").rstrip("/")
     contact = "Email: " + link("mailto:" + basics["email"], basics["email"])
     contact += r"\qquad ORCID: " + link("https://orcid.org/" + orcid, orcid)
-    website_label = basics["website"].removeprefix("https://").removeprefix("http://").rstrip("/")
     replacements = {
         "NAME": text(basics["name"]),
         "PDF_TITLE": text(basics["name"] + " - Curriculum Vitae"),
         "CONTACT": contact,
-        "WEBSITE": link(basics["website"], website_label),
         "SECTIONS": render_sections(data, (as_of or updated).isoformat()),
         "UPDATED": f"{calendar.month_name[updated.month]} {updated.day}, {updated.year}",
     }
