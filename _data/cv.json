@@ -95,6 +95,21 @@
   ],
   "publications": [
     {
+      "title": "Uniform positivity of the tau invariant",
+      "authors": [
+        {
+          "name": "Ruihua Wang"
+        }
+      ],
+      "year": 2026,
+      "status": "preprint",
+      "journal": "",
+      "arxiv": "2610.04994",
+      "url": "https://arxiv.org/pdf/2610.04994",
+      "note": "",
+      "id": "publications-ee3354d7-252f-4527-ba19-d8ac5b0440d5"
+    },
+    {
       "id": "obstructions-coloring-arithmetic-graphs",
       "title": "Obstructions to coloring arithmetic graphs",
       "authors": [
