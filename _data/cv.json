@@ -95,6 +95,35 @@
   ],
   "publications": [
     {
+      "title": "Large values of derivatives of quadratic Dirichlet $L$-functions",
+      "authors": [
+        {
+          "name": "Zikang Dong",
+          "url": "https://zikangdong.github.io/"
+        },
+        {
+          "name": "Ruihua Wang"
+        },
+        {
+          "name": "Weijia Wang"
+        },
+        {
+          "name": "Hao Zhang",
+          "url": "https://grzy.hnu.edu.cn/site/index/zhanghao"
+        },
+        {
+          "name": "Shengbo Zhao"
+        }
+      ],
+      "year": 2026,
+      "status": "preprint",
+      "journal": "",
+      "arxiv": "2610.24958",
+      "url": "https://arxiv.org/pdf/2610.24958",
+      "note": "",
+      "id": "publications-5f49c9a0-bcb6-4a2c-9018-a5abbe1402f1"
+    },
+    {
       "title": "Uniform positivity of the tau invariant",
       "authors": [
         {
